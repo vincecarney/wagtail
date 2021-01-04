@@ -72,13 +72,13 @@ class CloudflareBackend(BaseBackend):
     CHUNK_SIZE = 30
 
     def __init__(self, params):
-        self.cloudflare_email = params.pop("EMAIL", None)
+        self.cloudflare_email = params.get("EMAIL", None)
         self.cloudflare_api_key = (
-            params.pop("TOKEN", None)
-            or params.pop("API_KEY", None)
+            params.get("TOKEN", None)
+            or params.get("API_KEY", None)
         )
-        self.cloudflare_token = params.pop("BEARER_TOKEN", None)
-        self.cloudflare_zoneid = params.pop("ZONEID")
+        self.cloudflare_token = params.get("BEARER_TOKEN", None)
+        self.cloudflare_zoneid = params.get("ZONEID")
 
         if (
             (not self.cloudflare_email and self.cloudflare_api_key)
